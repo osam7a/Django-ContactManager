@@ -27,3 +27,5 @@ urlpatterns = [
 
     path('advanced_filters/', include('advanced_filters.urls'))
 ]
+
+urlpatterns += [path('i18n/', include('django.conf.urls.i18n'))]
