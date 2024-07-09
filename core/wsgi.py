@@ -1,5 +1,5 @@
 """
-WSGI config for ContactManager project.
+WSGI config for Django-Contact-Manager project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

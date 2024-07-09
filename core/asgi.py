@@ -1,5 +1,5 @@
 """
-ASGI config for ContactManager project.
+ASGI config for Django-Contact-Manager project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
