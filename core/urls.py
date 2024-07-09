@@ -27,5 +27,3 @@ urlpatterns = [
 
     path('advanced_filters/', include('advanced_filters.urls'))
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
