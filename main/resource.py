@@ -29,6 +29,9 @@ class ContactResource(resources.ModelResource):
             instance = row.instance
             import_instance.contacts.add(instance)
 
+    def before_export(self, queryset, *args, **kwargs):
+        self.fields['tags'].widget = widgets.ManyToManyWidget(Tag, field='tag_name')
+        
     # FIX UNIQUE CONSTRAINT VIOLATION
     def skip_row(self, instance, original, *args):
         try:
