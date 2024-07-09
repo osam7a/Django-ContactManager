@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
 
-    path(r'^advanced_filters/', include('advanced_filters.urls'))
+    path('advanced_filters/', include('advanced_filters.urls'))
 ]
