@@ -95,6 +95,12 @@ LOGGING = {
             "propagate": True,
         },
     },
+    "formatters": {
+        "verbose": {
+            "format": "[{levelname}:{asctime} {module}] {message}",
+            "style": "{",
+        },
+    },
 }
 
 WSGI_APPLICATION = 'core.wsgi.application'
