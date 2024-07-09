@@ -23,7 +23,7 @@ class ContactResource(resources.ModelResource):
         
 
     def after_import(self, dataset, result, *args, **kwargs):
-        title = "Import at " + datetime.now().strftime("%Y-%m-%d")
+        title = "Import at " + datetime.now().strftime("%Y-%m-%d %H:%M")
         import_instance = Import.objects.create(import_title=title)
         for row in result.rows:
             instance = row.instance
