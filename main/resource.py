@@ -27,6 +27,8 @@ class ContactResource(resources.ModelResource):
         title = "Import at " + datetime.now().strftime("%Y-%m-%d %H:%M")
         import_instance = Import.objects.create(import_title=title)
         for row in result.rows:
+            if not row.instance:
+                continue
             instance = row.instance
             import_instance.contacts.add(instance)
 
