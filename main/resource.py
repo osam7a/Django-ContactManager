@@ -31,8 +31,9 @@ class ContactResource(resources.ModelResource):
             if not row.instance:
                 continue
             instance = row.instance
-            import_instance.contacts.add(instance)
+            instance.save()
             import_instance.save()
+            import_instance.contacts.add(instance)
 
     def before_export(self, queryset, *args, **kwargs):
         self.fields['tags'].widget = widgets.ManyToManyWidget(Tag, field='tag_name')
