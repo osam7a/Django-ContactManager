@@ -28,10 +28,8 @@ class ContactResource(resources.ModelResource):
         import_instance = Import(import_title=title)
         import_instance.save()
         for row in result.rows:
-            if not row.instance:
-                continue
+            row.instance.save()
             instance = row.instance
-            instance.save()
             import_instance.save()
             import_instance.contacts.add(instance)
 
