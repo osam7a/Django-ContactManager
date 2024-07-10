@@ -25,13 +25,14 @@ class ContactResource(resources.ModelResource):
 
     def after_import(self, dataset, result, *args, **kwargs):
         title = "Import at " + datetime.now().strftime("%Y-%m-%d %H:%M")
-        import_instance = Import.objects.create(import_title=title)
+        import_instance = Import(import_title=title)
+        import_instance.save()
         for row in result.rows:
             if not row.instance:
                 continue
             instance = row.instance
-            instance.save()
             import_instance.contacts.add(instance)
+            import_instance.save()
 
     def before_export(self, queryset, *args, **kwargs):
         self.fields['tags'].widget = widgets.ManyToManyWidget(Tag, field='tag_name')
