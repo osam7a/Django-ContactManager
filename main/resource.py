@@ -27,7 +27,8 @@ class ContactResource(resources.ModelResource):
     def after_import(self, dataset, result, *args, **kwargs):
         title = "Import at " + datetime.now().strftime("%Y-%m-%d %H:%M")
         import_instance = Import(import_title=title)
-        import_instance.save()
+        try: import_instance.save()
+        except: return
         for row in result.rows:
             if isinstance(row, InvalidRow): continue
             try: 
