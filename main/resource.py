@@ -16,10 +16,11 @@ class ContactResource(resources.ModelResource):
 
     def before_import_row(self, row, **kwargs):
         tags = row.get('tags').replace("\"", "").split(',')
-        for tag in tags:
+        row['tags'] = ""
+        for i, tag in enumerate(tags):
             tag = tag.strip()
             tag, created = Tag.objects.get_or_create(tag_name=tag)
-            row['tags'] = tag.pk
+            row['tags'] += str(tag.pk) + ("," if i < len(tags) - 1 else "")
         
 
     def after_import(self, dataset, result, *args, **kwargs):
