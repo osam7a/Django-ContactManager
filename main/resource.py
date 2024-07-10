@@ -1,5 +1,6 @@
 from import_export import resources
 from import_export import widgets
+from import_export.results import InvalidRow
 
 from django.db.utils import IntegrityError
 
@@ -28,11 +29,12 @@ class ContactResource(resources.ModelResource):
         import_instance = Import(import_title=title)
         import_instance.save()
         for row in result.rows:
-            if row.import_type == "skip" or row.errors or row.diff == {}:
+            if isinstance(row, InvalidRow): continue
+            try: 
+                contact = Contact.objects.get(pk=row.instance.id)
+                import_instance.contacts.add(contact)
+            except:
                 continue
-            instance = row.instance
-            import_instance.save()
-            import_instance.contacts.add(instance)
 
     def before_export(self, queryset, *args, **kwargs):
         self.fields['tags'].widget = widgets.ManyToManyWidget(Tag, field='tag_name')
