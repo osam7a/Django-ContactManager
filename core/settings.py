@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
 # Application definition
 
@@ -162,6 +164,3 @@ STATIC_ROOT = path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 10485760
