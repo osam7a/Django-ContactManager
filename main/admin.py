@@ -93,6 +93,12 @@ class ContactAdmin(AdminAdvancedFiltersMixin, ImportExportModelAdmin):
             messages.SUCCESS
         )
 
+    def changelist_view(self, request, extra_context=None):
+        request.GET = request.GET.copy()
+        page_param = int(request.GET.pop('list_per_page', [100])[0])
+        self.list_per_page = page_param
+        return super(ContactAdmin, self).changelist_view(request, extra_context)
+
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Tag)
 admin.site.register(Import)
