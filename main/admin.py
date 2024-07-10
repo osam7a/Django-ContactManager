@@ -24,7 +24,7 @@ from .resource import ContactResource
 class ContactAdmin(AdminAdvancedFiltersMixin, ImportExportModelAdmin):
     resource_class = ContactResource
     list_display = ('id', 'email', 'name', 'phone', 'source', 'recently_contacted', 'recently_bounced', 'get_tags')
-    list_per_page = 150
+    list_per_page = 25
     
     advanced_filter_fields = (
         'name',
