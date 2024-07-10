@@ -96,6 +96,9 @@ Companies frequently face challenges in managing and hosting their large marketi
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+### "Why the hell is it built on Django's Admin??"
+Django's built-in CRUD really does the job, Especially since we won't really need THAT much functionality. So if we already have the wheel why not use it rather than create a whole different one from scratch? And overriding admin templates is not that hard ya'll
+
 
 ### Built With
 
