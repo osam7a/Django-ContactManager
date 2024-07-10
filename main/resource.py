@@ -30,6 +30,7 @@ class ContactResource(resources.ModelResource):
             if not row.instance:
                 continue
             instance = row.instance
+            instance.save()
             import_instance.contacts.add(instance)
 
     def before_export(self, queryset, *args, **kwargs):
