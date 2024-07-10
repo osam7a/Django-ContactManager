@@ -33,7 +33,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/osam7a/Django-ContactManager">
-    <img src="preview.png" alt="Preview" width="400" height="250">
+    <img src="preview.png" alt="Preview">
   </a>
 
   <h3 align="center">Django ContactManager - Contact Managing Software</h3>
