@@ -30,7 +30,7 @@ class Contact(models.Model): # Approx. 8.02 GB per 1 million records
     recently_bounced = models.BooleanField(default=False, help_text=_("Whether the contact recently bounced in one of the campiagns or not."))
     subscribed = models.BooleanField(default=True, help_text=_("Whether the contact is subscribed or not."))
     source = models.CharField(blank=True, max_length=255, help_text=_("The source of the contact."))
-    tags = models.ManyToManyField(Tag, blank=True, help_text=_("The tags of the contact."))
+    tags = models.ManyToManyField(Tag, blank=True, null=True, help_text=_("The tags of the contact."))
     
     auto_unmark = models.IntegerField(default=0, help_text=_("The number of days to wait before unmarking the contact as `recently_contacted`, put \"0\" to manually unmark."))
 

@@ -40,12 +40,40 @@ class ContactAdmin(AdminAdvancedFiltersMixin, ImportExportModelAdmin):
     list_filter = ('source', 'import__import_title', 'tags__tag_name', 'recently_contacted', 'recently_bounced')
     search_fields = ('name', 'email', 'company', 'address', 'phone', 'source', 'tags__tag_name')
 
-    actions = ['mark_as_recently_contacted', 'mark_as_recently_bounced']
+    actions = ['mark_as_recently_contacted', 'mark_as_recently_bounced', 'clear_tags']
 
     def get_tags(self, obj):
         return ", ".join([t.tag_name for t in obj.tags.all()])
     
     get_tags.short_description = 'Tags'
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        for tag in Tag.objects.all():
+            action_name = f'add_tag_{tag.id}'
+            actions[action_name] = (self.add_tag, action_name, f'Add tag: {tag.tag_name}')
+        return actions
+
+    def add_tag(self, modeladmin, request, queryset):
+        tag_id = int(request.POST['action'].split('_')[-1])
+        tag = Tag.objects.get(id=tag_id)
+        for contact in queryset:
+            contact.tags.add(tag)
+        self.message_user(
+            request,
+            _(f'{queryset.count()} contacts were tagged with {tag.tag_name}.'),
+            messages.SUCCESS
+        )
+
+    @admin.action(description='Clear tags')
+    def clear_tags(self, request, queryset):
+        for contact in queryset:
+            contact.tags.clear()
+        self.message_user(
+            request,
+            _(f'{queryset.count()} contacts were untagged.'),
+            messages.SUCCESS
+        )
 
     @admin.action(description='Mark as recently contacted')
     def mark_as_recently_contacted(self, request, queryset):
